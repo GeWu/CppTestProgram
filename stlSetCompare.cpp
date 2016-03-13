@@ -11,12 +11,20 @@ struct stringPtrLess:
         }
 };
 
+struct DereferenceLess{
+    template<typename PtrType>
+        bool operator()(PtrType pt1, 
+                PtrType pt2) const{
+            return *pt1 < *pt2;
+        }
+};
+
 void print(const string* ps){
     cout << *ps << endl;
 }
 
 void output(){
-    set<string*, stringPtrLess> ssp;
+    set<string*, DereferenceLess> ssp;
     ssp.insert(new string("Anteater"));
     ssp.insert(new string("wombat"));
     ssp.insert(new string("Lemur"));
